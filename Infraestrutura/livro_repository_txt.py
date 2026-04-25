@@ -2,6 +2,8 @@
 Armazenamento e recuperação de dados
 '''
 from Entidade.livro_repository_interface import ILivroRepository
+from Entidade.livro import Livro
+from flask import Flask
 import os
 
 template_dir = os.path.abspath('templates')

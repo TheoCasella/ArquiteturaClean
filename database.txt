@@ -1,4 +1,4 @@
-1;Dom Casmurro;Machado de Assis;45.0
-2;O Alquimista;Paulo Coelho;35.0
-3;Memorias Postumas;Machado de Assis;50.0
-4;O Codigo Da Vinci;Dan Brown;42.90
+1;Dom Casmurro;Machado de Assis;40.5
+2;O Alquimista;Paulo Coelho;31.5
+3;Memorias Postumas;Machado de Assis;45.0
+4;O Codigo Da Vinci;Dan Brown;38.61
