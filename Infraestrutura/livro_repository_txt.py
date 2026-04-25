@@ -4,11 +4,14 @@ Armazenamento e recuperação de dados
 from Entidade.livro_repository_interface import ILivroRepository
 import os
 
+template_dir = os.path.abspath('templates')
+app = Flask(__name__, template_folder=template_dir)
+
 class LivroRepositoryTXT(ILivroRepository):
     def __init__(self, arquivo="database.txt"):
         self.arquivo = arquivo
         #Caso o arquivo database.txt nao exista, ele cria
-        if not os.path.exists(self,arquivo):
+        if not os.path.exists(self.arquivo):
             with open(self.arquivo,"r") as f:
                 pass
     #arquivo .txt --> lista de objetos 'livros'
