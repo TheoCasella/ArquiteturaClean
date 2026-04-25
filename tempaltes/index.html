@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Livraria Clean Arch</title>
+    <style>
+        body { font-family: sans-serif; margin: 40px; line-height: 1.6; }
+        .livro { border-bottom: 1px solid #ccc; padding: 10px; }
+        .erro { color: red; font-weight: bold; }
+        .sucesso { color: green; }
+    </style>
+</head>
+<body>
+    <h1>Minha Livraria (Clean Architecture)</h1>
+
+    <input type="text" id="busca" placeholder="Buscar por título ou autor...">
+    <button onclick="buscar()">Pesquisar</button>
+    <button onclick="aplicarDesconto()" style="background-color: #ffcc00;">Aplicar 10% de Desconto</button>
+
+    <p id="mensagem"></p>
+
+    <div id="lista-livros"></div>
+
+    <script>
+        async function buscar() {
+            const termo = document.getElementById('busca').value;
+            const response = await fetch(`/api/buscar?q=${termo}`);
+            const livros = await response.json();
+            renderizar(livros);
+        }
+
+        async function aplicarDesconto() {
+            const msgElement = document.getElementById('mensagem');
+            const response = await fetch('/api/promocao', { method: 'POST' });
+            const dados = await response.json();
+
+            if (response.status === 400) {
+                msgElement.className = 'erro';
+                msgElement.innerText = dados.mensagem; // Exibe o erro do Use Case
+            } else {
+                msgElement.className = 'sucesso';
+                msgElement.innerText = "Desconto aplicado com sucesso no arquivo TXT!";
+                renderizar(dados);
+            }
+        }
+
+        function renderizar(livros) {
+            const lista = document.getElementById('lista-livros');
+            lista.innerHTML = livros.map(l => `
+                <div class="livro">
+                    <strong>${l.titulo}</strong> - ${l.autor} <br>
+                    Preço: R$ ${l.preco.toFixed(2)}
+                </div>
+            `).join('');
+        }
+
+        // Carrega ao abrir a página
+        buscar();
+    </script>
+</body>
+</html>
